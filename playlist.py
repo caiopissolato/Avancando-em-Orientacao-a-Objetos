@@ -38,13 +38,10 @@ class Serie(Programa):
     def __str__(self):
         return f'Nome: {self.nome} - {self.temporadas} temporadas - Likes: {self.likes}'
 
-class Playlist():
+class Playlist(list):
     def __init__(self, nome, programas):
         self.nome = nome
-        self.programas = programas
-
-    def tamanho(self):
-        return len(self.programas)
+        super().__init__(programas)
 
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
 atlanta = Serie('atlanta', 2018, 2)
@@ -62,7 +59,9 @@ demolidor.dar_likes()
 demolidor.dar_likes()
 
 listinha = [atlanta, vingadores, demolidor, tmep]
-minha_playlist = Playlist('fim de semana', listinha)
+minha_playlist = Playlist('Fim de semana', listinha)
 
-for programa in minha_playlist.programas:
+for programa in minha_playlist:
     print(programa)
+
+print(f'Tamanho: {len(minha_playlist)}') #Imprime o tamanho da minha_playlist pois agora a classe Playlist herda de list se tornando assim iterável
