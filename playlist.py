@@ -17,7 +17,7 @@ class Programa:
 
     @nome.setter
     def nome(self, nome):
-        self._nome = nome
+        self._nome = nome 
 
     def __str__(self):
         return f'Nome: {self.nome} Likes: {self.likes}'
@@ -38,10 +38,20 @@ class Serie(Programa):
     def __str__(self):
         return f'Nome: {self.nome} - {self.temporadas} temporadas - Likes: {self.likes}'
 
-class Playlist(list):
+class Playlist:
     def __init__(self, nome, programas):
         self.nome = nome
-        super().__init__(programas)
+        self._programas = programas
+
+    def __getitem__(self, item): # implementando esse método define alguém que é iterável
+        return self._programas[item]
+
+    @property
+    def listagem(self):
+        return self._programas
+
+    def __len__(self):
+        return len(self._programas)
 
 vingadores = Filme('vingadores - guerra infinita', 2018, 160)
 atlanta = Serie('atlanta', 2018, 2)
@@ -64,4 +74,6 @@ minha_playlist = Playlist('Fim de semana', listinha)
 for programa in minha_playlist:
     print(programa)
 
+print(vingadores in minha_playlist)
+print(minha_playlist[1])
 print(f'Tamanho: {len(minha_playlist)}') #Imprime o tamanho da minha_playlist pois agora a classe Playlist herda de list se tornando assim iterável
